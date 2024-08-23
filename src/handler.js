@@ -28,6 +28,7 @@ const addBookHandler = (request, h) => {
   const updatedAt = insertedAt;
   const finished = false;
   const newBook = {
+    id,
     name,
     year,
     author,
@@ -87,6 +88,22 @@ const addBookHandler = (request, h) => {
 
 const getAllBooksHandler = (request, h) => {
   // Ambil semua buku
+  dataBooks = [];
+  for (let i = 0; i < books.length; i++) {
+    var id = books[i].id;
+    var name = books[i].name;
+    var publisher = books[i].publisher;
+    dataBooks.push({ id, name, publisher });
+  }
+
+  const response = h.response({
+    status: "success",
+    data: {
+      books: dataBooks,
+    },
+  });
+  response.code(200);
+  return response;
 };
 
 const getBookByIdHandler = (request, h) => {
